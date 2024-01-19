@@ -349,46 +349,46 @@ inline uint64_t DeleteAllStatesProperties(uint64_t inprops,
 
 inline uint64_t DeleteArcsProperties(uint64_t inprops);
 
-uint64_t ClosureProperties(uint64_t inprops, bool star, bool delayed = false);
+uint64_t fst_EXPORT ClosureProperties(uint64_t inprops, bool star, bool delayed = false);
 
-uint64_t ComplementProperties(uint64_t inprops);
+uint64_t fst_EXPORT ComplementProperties(uint64_t inprops);
 
-uint64_t ComposeProperties(uint64_t inprops1, uint64_t inprops2);
+uint64_t fst_EXPORT ComposeProperties(uint64_t inprops1, uint64_t inprops2);
 
-uint64_t ConcatProperties(uint64_t inprops1, uint64_t inprops2,
+uint64_t fst_EXPORT ConcatProperties(uint64_t inprops1, uint64_t inprops2,
                           bool delayed = false);
 
-uint64_t DeterminizeProperties(uint64_t inprops, bool has_subsequential_label,
+uint64_t fst_EXPORT DeterminizeProperties(uint64_t inprops, bool has_subsequential_label,
                                bool distinct_psubsequential_labels);
 
-uint64_t FactorWeightProperties(uint64_t inprops);
+uint64_t fst_EXPORT FactorWeightProperties(uint64_t inprops);
 
-uint64_t InvertProperties(uint64_t inprops);
+uint64_t fst_EXPORT InvertProperties(uint64_t inprops);
 
-uint64_t ProjectProperties(uint64_t inprops, bool project_input);
+uint64_t fst_EXPORT ProjectProperties(uint64_t inprops, bool project_input);
 
-uint64_t RandGenProperties(uint64_t inprops, bool weighted);
+uint64_t fst_EXPORT RandGenProperties(uint64_t inprops, bool weighted);
 
-uint64_t RelabelProperties(uint64_t inprops);
+uint64_t fst_EXPORT RelabelProperties(uint64_t inprops);
 
-uint64_t ReplaceProperties(const std::vector<uint64_t> &inprops, size_t root,
+uint64_t fst_EXPORT ReplaceProperties(const std::vector<uint64_t> &inprops, size_t root,
                            bool epsilon_on_call, bool epsilon_on_return,
                            bool out_epsilon_on_call, bool out_epsilon_on_return,
                            bool replace_transducer, bool no_empty_fst,
                            bool all_ilabel_sorted, bool all_olabel_sorted,
                            bool all_negative_or_dense);
 
-uint64_t ReverseProperties(uint64_t inprops, bool has_superinitial);
+uint64_t fst_EXPORT ReverseProperties(uint64_t inprops, bool has_superinitial);
 
-uint64_t ReweightProperties(uint64_t inprops, bool added_start_epsilon);
+uint64_t fst_EXPORT ReweightProperties(uint64_t inprops, bool added_start_epsilon);
 
-uint64_t RmEpsilonProperties(uint64_t inprops, bool delayed = false);
+uint64_t fst_EXPORT RmEpsilonProperties(uint64_t inprops, bool delayed = false);
 
-uint64_t ShortestPathProperties(uint64_t props, bool tree = false);
+uint64_t fst_EXPORT ShortestPathProperties(uint64_t props, bool tree = false);
 
-uint64_t SynchronizeProperties(uint64_t inprops);
+uint64_t fst_EXPORT SynchronizeProperties(uint64_t inprops);
 
-uint64_t UnionProperties(uint64_t inprops1, uint64_t inprops2,
+uint64_t fst_EXPORT UnionProperties(uint64_t inprops1, uint64_t inprops2,
                          bool delayed = false);
 
 // Definitions of inlined functions.
@@ -492,7 +492,7 @@ uint64_t AddArcProperties(uint64_t inprops, typename Arc::StateId s,
 
 namespace internal {
 
-extern const std::string_view PropertyNames[];
+extern const std::string_view fst_EXPORT PropertyNames[];
 
 // For a binary property, the bit is always returned set. For a trinary (i.e.,
 // two-bit) property, both bits are returned set iff either corresponding input

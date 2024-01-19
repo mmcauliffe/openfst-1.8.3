@@ -24,12 +24,14 @@
 #include <string>
 
 #include <fst/compat.h>
+#include <fst/exports/exports.h>
+
 namespace fst {
 namespace script {
 
-std::string LoadArcTypeFromFar(const std::string &far_source);
+std::string fstfarscript_EXPORT LoadArcTypeFromFar(const std::string &far_source);
 
-std::string LoadArcTypeFromFst(const std::string &fst_source);
+std::string fstfarscript_EXPORT LoadArcTypeFromFst(const std::string &fst_source);
 
 }  // namespace script
 }  // namespace fst

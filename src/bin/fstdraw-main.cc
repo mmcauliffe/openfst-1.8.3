@@ -72,7 +72,7 @@ int fstdraw_main(int argc, char **argv) {
       argc > 2 && strcmp(argv[2], "-") != 0 ? argv[2] : "";
   std::ofstream fstrm;
   if (!out_name.empty()) {
-    fstrm.open(out_name);
+    fstrm.open(out_name, std::ios_base::out | std::ios_base::binary);
     if (!fstrm) {
       LOG(ERROR) << argv[0] << ": Open failed, file = " << out_name;
       return 1;

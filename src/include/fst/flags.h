@@ -32,6 +32,8 @@
 
 #include <fst/lock.h>
 
+#include <fst/exports/exports.h>
+
 // FLAGS USAGE:
 //
 // Definition example:
@@ -56,6 +58,13 @@
 #define DECLARE_uint64(name) extern uint64_t FST_FLAGS_##name
 #define DECLARE_double(name) extern double FST_FLAGS_ ## name
 
+#define DECLARE_export_bool(name, export_macro) extern bool export_macro FST_FLAGS_##name
+#define DECLARE_export_string(name, export_macro) extern std::string export_macro FST_FLAGS_##name
+#define DECLARE_export_int32(name, export_macro) extern int32_t export_macro FST_FLAGS_##name
+#define DECLARE_export_int64(name, export_macro) extern int64_t export_macro FST_FLAGS_##name
+#define DECLARE_export_uint64(name, export_macro) extern uint64_t export_macro FST_FLAGS_##name
+#define DECLARE_export_double(name, export_macro) extern double export_macro FST_FLAGS_##name
+
 template <typename T>
 struct FlagDescription {
   FlagDescription(T *addr, std::string_view doc, std::string_view type,
@@ -73,12 +82,46 @@ struct FlagDescription {
   const T default_value;
 };
 
+
+
+#ifdef _WIN32
+class FlagRegisterBase { };
+
+class FlagSingleton {
+public:
+
+    template <class RegisterType>
+    std::shared_ptr<RegisterType> GetRegister() {
+
+        std::string type_name = typeid(RegisterType).name();
+        if (registry.find(type_name) == registry.end()) {
+            std::shared_ptr<RegisterType> r = std::make_shared<RegisterType>();
+            registry[type_name] = std::static_pointer_cast <FlagRegisterBase>(r);
+        }
+        return  std::static_pointer_cast <RegisterType>(registry[type_name]);
+    }
+private:
+    std::map<std::string, std::shared_ptr<FlagRegisterBase>> registry;
+};
+
+fst_EXPORT FlagSingleton& GetFlagSingleton();
+
+#endif // _WIN32
+
 template <typename T>
+#ifdef _WIN32
+class FlagRegister: public FlagRegisterBase {
+#else
 class FlagRegister {
+#endif
  public:
   static FlagRegister<T> *GetRegister() {
-    static auto reg = new FlagRegister<T>;
-    return reg;
+    #ifdef _WIN32
+      return GetFlagSingleton().GetRegister<FlagRegister<T>>().get();
+    #else
+      static auto reg = new FlagRegister<T>;
+      return reg;
+    #endif
   }
 
   const FlagDescription<T> &GetFlagDescription(const std::string &name) const {
@@ -181,8 +224,12 @@ template <typename T>
 class FlagRegisterer {
  public:
   FlagRegisterer(const std::string &name, const FlagDescription<T> &desc) {
+    #ifdef _WIN32
+    GetFlagSingleton().GetRegister<FlagRegister<T>>()->SetDescription(name, desc);
+    #else
     auto registr = FlagRegister<T>::GetRegister();
     registr->SetDescription(name, desc);
+    #endif
   }
 
  private:
@@ -210,9 +257,9 @@ class FlagRegisterer {
 
 
 // Temporary directory.
-DECLARE_string(tmpdir);
+DECLARE_export_string(tmpdir, fst_EXPORT);
 
-void SetFlags(const char *usage, int *argc, char ***argv, bool remove_flags,
+void fst_EXPORT SetFlags(const char *usage, int *argc, char ***argv, bool remove_flags,
               const char *src = "");
 
 // This is an unpleasant hack around SetFlag API.
@@ -221,7 +268,7 @@ void SetFlag(Type *flag, Value value) {
   *flag = Type(value);
 }
 
-void FailedNewHandler();
+void fst_EXPORT FailedNewHandler();
 
 #define SET_FLAGS(usage, argc, argv, rmflags) \
 std::set_new_handler(FailedNewHandler); \
@@ -232,6 +279,6 @@ inline void InitFst(const char *usage, int *argc, char ***argv, bool rmflags) {
   return SetFlags(usage, argc, argv, rmflags);
 }
 
-void ShowUsage(bool long_usage = true);
+void fst_EXPORT ShowUsage(bool long_usage = true);
 
 #endif  // FST_FLAGS_H_

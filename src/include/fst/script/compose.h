@@ -24,6 +24,7 @@
 #include <fst/fst.h>
 #include <fst/mutable-fst.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -40,7 +41,7 @@ void Compose(FstComposeArgs *args) {
   Compose(ifst1, ifst2, ofst, opts);
 }
 
-void Compose(const FstClass &ifst1, const FstClass &ifst2,
+void fstscript_EXPORT Compose(const FstClass &ifst1, const FstClass &ifst2,
              MutableFstClass *ofst,
              const ComposeOptions &opts = ComposeOptions());
 

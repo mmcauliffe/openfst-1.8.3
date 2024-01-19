@@ -40,6 +40,7 @@
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
 #include <fst/script/shortest-path.h>
+#include <fst/exports/exports.h>
 // FstClassPair, and to detect
 // any collisions.
 
@@ -74,7 +75,7 @@ void Compose(MPdtComposeArgs *args) {
   }
 }
 
-void Compose(const FstClass &ifst1, const FstClass &ifst2,
+void fstmpdtscript_EXPORT Compose(const FstClass &ifst1, const FstClass &ifst2,
              const std::vector<std::pair<int64_t, int64_t>> &parens,
              const std::vector<int64_t> &assignments, MutableFstClass *ofst,
              const MPdtComposeOptions &copts, bool left_pdt);
@@ -103,7 +104,7 @@ void Expand(MPdtExpandArgs *args) {
                            std::get<4>(*args).keep_parentheses));
 }
 
-void Expand(const FstClass &ifst,
+void fstmpdtscript_EXPORT Expand(const FstClass &ifst,
             const std::vector<std::pair<int64_t, int64_t>> &parens,
             const std::vector<int64_t> &assignments, MutableFstClass *ofst,
             const MPdtExpandOptions &opts);
@@ -134,7 +135,7 @@ void Reverse(MPdtReverseArgs *args) {
             std::get<2>(*args)->begin());
 }
 
-void Reverse(const FstClass &ifst,
+void fstmpdtscript_EXPORT Reverse(const FstClass &ifst,
              const std::vector<std::pair<int64_t, int64_t>> &parens,
              std::vector<int64_t> *assignments, MutableFstClass *ofst);
 
@@ -161,7 +162,7 @@ void Info(MPdtInfoArgs *args) {
   mpdtinfo.Print();
 }
 
-void Info(const FstClass &ifst,
+void fstmpdtscript_EXPORT Info(const FstClass &ifst,
           const std::vector<std::pair<int64_t, int64_t>> &parens,
           const std::vector<int64_t> &assignments);
 

@@ -18,7 +18,9 @@
 #ifndef FST_EXTENSIONS_FAR_COMPILE_STRINGS_H_
 #define FST_EXTENSIONS_FAR_COMPILE_STRINGS_H_
 
+#ifndef _WIN32
 #include <libgen.h>
+#endif
 
 #include <cstddef>
 #include <cstdint>
@@ -41,6 +43,11 @@
 #include <fst/util.h>
 #include <fst/vector-fst.h>
 #include <string_view>
+
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
 
 namespace fst {
 namespace internal {
@@ -146,7 +153,7 @@ class StringReader {
 
 // Computes the minimal length required to encode each line number as a decimal
 // number, or zero if the file is not seekable.
-int KeySize(std::string_view source);
+int fstfarscript_EXPORT KeySize(std::string_view source);
 
 }  // namespace internal
 
@@ -205,12 +212,18 @@ void CompileStrings(const std::vector<std::string> &sources,
     }
     std::ifstream fstrm;
     if (!in_source.empty()) {
-      fstrm.open(in_source);
+      fstrm.open(in_source, std::ios_base::in | std::ios_base::binary);
       if (!fstrm) {
         FSTERROR() << "CompileStrings: Can't open file: " << in_source;
         return;
       }
     }
+    
+    #ifdef _WIN32
+    if (!fstrm.is_open()) {
+        _setmode(_fileno(stdin), _O_BINARY);
+    }
+    #endif
     std::istream &istrm = fstrm.is_open() ? fstrm : std::cin;
     bool keep_syms = keep_symbols;
     for (internal::StringReader<Arc> reader(

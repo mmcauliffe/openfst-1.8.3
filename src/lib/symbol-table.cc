@@ -345,7 +345,7 @@ void SymbolTableImpl::ShrinkToFit() { symbols_.ShrinkToFit(); }
 
 SymbolTable * SymbolTable::ReadText(const std::string &source,
                                                     const std::string &sep) {
-  std::ifstream strm(source, std::ios_base::in);
+  std::ifstream strm(source, std::ios_base::in | std::ios_base::binary);
   if (!strm.good()) {
     LOG(ERROR) << "SymbolTable::ReadText: Can't open file: " << source;
     return nullptr;
@@ -383,7 +383,7 @@ bool SymbolTable::WriteText(std::ostream &strm, const std::string &sep) const {
 bool SymbolTable::WriteText(const std::string &sink,
                             const std::string &sep) const {
   if (!sink.empty()) {
-    std::ofstream strm(sink);
+    std::ofstream strm(sink, std::ios_base::out | std::ios_base::binary);
     if (!strm) {
       LOG(ERROR) << "SymbolTable::WriteText: Can't open file: " << sink;
       return false;

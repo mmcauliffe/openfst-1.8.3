@@ -24,6 +24,7 @@
 #include <fst/mutable-fst.h>
 #include <fst/reverse.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -37,7 +38,7 @@ void Reverse(FstReverseArgs *args) {
   Reverse(ifst, ofst, std::get<2>(*args));
 }
 
-void Reverse(const FstClass &ifst, MutableFstClass *ofst,
+void fstscript_EXPORT Reverse(const FstClass &ifst, MutableFstClass *ofst,
              bool require_superinitial = true);
 
 }  // namespace script

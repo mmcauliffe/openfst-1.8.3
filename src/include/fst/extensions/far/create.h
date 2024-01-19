@@ -20,7 +20,9 @@
 #ifndef FST_EXTENSIONS_FAR_CREATE_H_
 #define FST_EXTENSIONS_FAR_CREATE_H_
 
+#ifndef _WIN32
 #include <libgen.h>
+#endif
 
 #include <cstddef>
 #include <cstdint>

@@ -48,7 +48,7 @@ struct MemoryRegion {
 #endif
 };
 
-class MappedFile {
+class fst_EXPORT MappedFile {
  public:
   ~MappedFile();
 

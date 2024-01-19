@@ -37,11 +37,12 @@
 #include <fst/script/prune.h>
 #include <fst/script/script-impl.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
 
-struct ShortestDistanceOptions {
+struct fstscript_EXPORT ShortestDistanceOptions {
   const QueueType queue_type;
   const ArcFilterType arc_filter_type;
   const int64_t source;
@@ -237,14 +238,14 @@ void ShortestDistance(FstShortestDistanceArgs3 *args) {
   args->retval = WeightClass(ShortestDistance(fst, std::get<1>(args->args)));
 }
 
-void ShortestDistance(const FstClass &fst, std::vector<WeightClass> *distance,
+void fstscript_EXPORT ShortestDistance(const FstClass &fst, std::vector<WeightClass> *distance,
                       const ShortestDistanceOptions &opts);
 
-void ShortestDistance(const FstClass &ifst, std::vector<WeightClass> *distance,
+void fstscript_EXPORT ShortestDistance(const FstClass &ifst, std::vector<WeightClass> *distance,
                       bool reverse = false,
                       double delta = fst::kShortestDelta);
 
-WeightClass ShortestDistance(const FstClass &ifst,
+WeightClass fstscript_EXPORT ShortestDistance(const FstClass &ifst,
                              double delta = fst::kShortestDelta);
 
 }  // namespace script

@@ -24,6 +24,7 @@
 #include <fst/mutable-fst.h>
 #include <fst/rational.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -36,7 +37,7 @@ void Closure(FstClosureArgs *args) {
   Closure(fst, std::get<1>(*args));
 }
 
-void Closure(MutableFstClass *ofst, ClosureType closure_type);
+void fstscript_EXPORT Closure(MutableFstClass *ofst, ClosureType closure_type);
 
 }  // namespace script
 }  // namespace fst

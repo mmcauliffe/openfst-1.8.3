@@ -67,7 +67,7 @@ int fstprint_main(int argc, char **argv) {
   std::string dest = "standard output";
   std::ofstream fstrm;
   if (argc == 3) {
-    fstrm.open(argv[2]);
+    fstrm.open(argv[2], std::ios_base::out | std::ios_base::binary);
     if (!fstrm) {
       LOG(ERROR) << argv[0] << ": Open failed, file = " << argv[2];
       return 1;

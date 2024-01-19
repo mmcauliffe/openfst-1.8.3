@@ -26,11 +26,12 @@
 #include <fst/mutable-fst.h>
 #include <fst/script/fst-class.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
 
-struct DeterminizeOptions {
+struct fstscript_EXPORT DeterminizeOptions {
   const float delta;
   const WeightClass &weight_threshold;
   const int64_t state_threshold;
@@ -68,7 +69,7 @@ void Determinize(FstDeterminizeArgs *args) {
   Determinize(ifst, ofst, detargs);
 }
 
-void Determinize(const FstClass &ifst, MutableFstClass *ofst,
+void fstscript_EXPORT Determinize(const FstClass &ifst, MutableFstClass *ofst,
                  const DeterminizeOptions &opts);
 
 }  // namespace script

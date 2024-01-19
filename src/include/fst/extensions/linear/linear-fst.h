@@ -50,6 +50,11 @@
 #include <fst/symbol-table.h>
 #include <fst/util.h>
 
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
+
 namespace fst {
 
 // Forward declaration of the specialized matcher for both
@@ -525,6 +530,9 @@ class LinearTaggerFst : public ImplToFst<internal::LinearTaggerFstImpl<A>> {
       }
       return Read(strm, FstReadOptions(source));
     } else {
+        #ifdef _WIN32
+          _setmode(_fileno(stdin), _O_BINARY);
+        #endif
       return Read(std::cin, FstReadOptions("standard input"));
     }
   }
@@ -545,6 +553,9 @@ class LinearTaggerFst : public ImplToFst<internal::LinearTaggerFstImpl<A>> {
       }
       return Write(strm, FstWriteOptions(source));
     } else {
+      #ifdef _WIN32
+        _setmode(_fileno(stdout), _O_BINARY);
+      #endif
       return Write(std::cout, FstWriteOptions("standard output"));
     }
   }
@@ -976,6 +987,9 @@ class LinearClassifierFst
       }
       return Read(strm, FstReadOptions(source));
     } else {
+        #ifdef _WIN32
+          _setmode(_fileno(stdin), _O_BINARY);
+        #endif
       return Read(std::cin, FstReadOptions("standard input"));
     }
   }
@@ -997,6 +1011,9 @@ class LinearClassifierFst
       }
       return Write(strm, FstWriteOptions(source));
     } else {
+      #ifdef _WIN32
+        _setmode(_fileno(stdout), _O_BINARY);
+      #endif
       return Write(std::cout, FstWriteOptions("standard output"));
     }
   }

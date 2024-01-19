@@ -42,7 +42,7 @@
 #include <fst/compat.h>
 #include <string_view>
 
-DECLARE_string(fst_field_separator);
+DECLARE_export_string(fst_field_separator, fst_EXPORT);
 
 namespace fst {
 

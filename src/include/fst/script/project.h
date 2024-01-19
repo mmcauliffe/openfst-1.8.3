@@ -23,6 +23,7 @@
 #include <fst/mutable-fst.h>
 #include <fst/project.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -35,7 +36,7 @@ void Project(FstProjectArgs *args) {
   Project(fst, std::get<1>(*args));
 }
 
-void Project(MutableFstClass *fst, ProjectType project_type);
+void fstscript_EXPORT Project(MutableFstClass *fst, ProjectType project_type);
 
 }  // namespace script
 }  // namespace fst

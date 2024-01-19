@@ -47,14 +47,14 @@
 #include <string_view>
 #include <fst/lock.h>
 
-DECLARE_bool(fst_compat_symbols);
-DECLARE_string(fst_field_separator);
+DECLARE_export_bool(fst_compat_symbols, fst_EXPORT);
+DECLARE_export_string(fst_field_separator, fst_EXPORT);
 
 namespace fst {
 
 inline constexpr int64_t kNoSymbol = -1;
 
-class SymbolTable;
+class fst_EXPORT SymbolTable;
 
 namespace internal {
 
@@ -583,14 +583,14 @@ SymbolTable *RelabelSymbolTable(
 
 // Returns true if the two symbol tables have equal checksums. Passing in
 // nullptr for either table always returns true.
-bool CompatSymbols(const SymbolTable *syms1, const SymbolTable *syms2,
+bool fst_EXPORT CompatSymbols(const SymbolTable *syms1, const SymbolTable *syms2,
                    bool warning = true);
 
 // Symbol table serialization.
 
-void SymbolTableToString(const SymbolTable *table, std::string *result);
+void fst_EXPORT SymbolTableToString(const SymbolTable *table, std::string *result);
 
-SymbolTable *StringToSymbolTable(const std::string &str);
+SymbolTable fst_EXPORT *StringToSymbolTable(const std::string &str);
 
 }  // namespace fst
 

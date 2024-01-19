@@ -41,13 +41,13 @@
 #include <unordered_map>
 #include <functional>
 
-DECLARE_bool(fst_default_cache_gc);
-DECLARE_int64(fst_default_cache_gc_limit);
+DECLARE_export_bool(fst_default_cache_gc, fst_EXPORT);
+DECLARE_export_int64(fst_default_cache_gc_limit, fst_EXPORT);
 
 namespace fst {
 
 // Options for controlling caching behavior; higher level than CacheImplOptions.
-struct CacheOptions {
+struct fst_EXPORT CacheOptions {
   bool gc;          // Enables GC.
   size_t gc_limit;  // Number of bytes allowed before GC.
 

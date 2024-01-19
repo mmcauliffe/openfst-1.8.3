@@ -25,6 +25,7 @@
 
 #include <fst/compat.h>
 #include <fst/log.h>
+#include <fst/exports/exports.h>
 
 // This class is a bitstring storage class with an index that allows
 // seeking to the Nth set or clear bit in time O(Log(N)) (or
@@ -89,7 +90,7 @@
 
 namespace fst {
 
-class BitmapIndex {
+class fstngram_EXPORT BitmapIndex {
  public:
   static size_t StorageSize(size_t num_bits) {
     return ((num_bits + kStorageBlockMask) >> kStorageLogBitSize);

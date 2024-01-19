@@ -53,7 +53,7 @@ SymbolTable *PruneSymbolTable(const Fst<Arc> &fst, const SymbolTable &syms,
 }
 
 // Relabels a symbol table to make it a contiguous mapping.
-SymbolTable *CompactSymbolTable(const SymbolTable &syms);
+SymbolTable fst_EXPORT *CompactSymbolTable(const SymbolTable &syms);
 
 // Merges two SymbolTables, all symbols from left will be merged into right
 // with the same IDs. Symbols in right that have conflicting IDs with those
@@ -72,19 +72,19 @@ SymbolTable *CompactSymbolTable(const SymbolTable &syms);
 //                                     b.InputSymbols(), &relabel);
 //   if (relabel) Relabel(b, bnew.get(), nullptr);
 //   b.SetInputSymbols(bnew);
-SymbolTable *MergeSymbolTable(const SymbolTable &left, const SymbolTable &right,
+SymbolTable fst_EXPORT *MergeSymbolTable(const SymbolTable &left, const SymbolTable &right,
                               bool *right_relabel_output = nullptr);
 
 // Read the symbol table from any Fst::Read()able file, without loading the
 // corresponding FST. Returns nullptr if the FST does not contain a symbol
 // table or the symbol table cannot be read.
-SymbolTable * FstReadSymbols(const std::string &source,
+SymbolTable fst_EXPORT * FstReadSymbols(const std::string &source,
                                              bool input);
 
 // Adds a contiguous range of symbols to a symbol table using a simple prefix
 // for the string, returning false if the inserted symbol string clashes with
 // any currently present.
-bool AddAuxiliarySymbols(const std::string &prefix, int64_t start_label,
+bool fst_EXPORT AddAuxiliarySymbols(const std::string &prefix, int64_t start_label,
                          int64_t nlabels, SymbolTable *syms);
 
 }  // namespace fst

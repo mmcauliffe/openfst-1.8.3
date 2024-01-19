@@ -35,11 +35,12 @@
 #include <fst/script/fst-class.h>
 #include <fst/script/shortest-distance.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
 
-struct RmEpsilonOptions : public ShortestDistanceOptions {
+struct fstscript_EXPORT RmEpsilonOptions : public ShortestDistanceOptions {
   const bool connect;
   const WeightClass &weight_threshold;
   const int64_t state_threshold;
@@ -130,7 +131,7 @@ void RmEpsilon(FstRmEpsilonArgs *args) {
   internal::RmEpsilon(fst, opts);
 }
 
-void RmEpsilon(MutableFstClass *fst, const RmEpsilonOptions &opts);
+void fstscript_EXPORT RmEpsilon(MutableFstClass *fst, const RmEpsilonOptions &opts);
 
 }  // namespace script
 }  // namespace fst

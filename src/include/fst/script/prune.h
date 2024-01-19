@@ -31,6 +31,7 @@
 #include <fst/weight.h>
 #include <fst/script/fst-class.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -68,11 +69,11 @@ void Prune(FstPruneArgs2 *args) {
   }
 }
 
-void Prune(const FstClass &ifst, MutableFstClass *ofst,
+void fstscript_EXPORT Prune(const FstClass &ifst, MutableFstClass *ofst,
            const WeightClass &weight_threshold,
            int64_t state_threshold = kNoStateId, float delta = kDelta);
 
-void Prune(MutableFstClass *fst, const WeightClass &weight_threshold,
+void fstscript_EXPORT Prune(MutableFstClass *fst, const WeightClass &weight_threshold,
            int64_t state_threshold = kNoStateId, float delta = kDelta);
 
 }  // namespace script

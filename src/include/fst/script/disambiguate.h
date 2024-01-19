@@ -27,11 +27,12 @@
 #include <fst/mutable-fst.h>
 #include <fst/script/fst-class.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
 
-struct DisambiguateOptions {
+struct fstscript_EXPORT DisambiguateOptions {
   const float delta;
   const WeightClass &weight_threshold;
   const int64_t state_threshold;
@@ -62,7 +63,7 @@ void Disambiguate(FstDisambiguateArgs *args) {
   Disambiguate(ifst, ofst, disargs);
 }
 
-void Disambiguate(const FstClass &ifst, MutableFstClass *ofst,
+void fstscript_EXPORT Disambiguate(const FstClass &ifst, MutableFstClass *ofst,
                   const DisambiguateOptions &opts);
 
 }  // namespace script

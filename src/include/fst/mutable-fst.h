@@ -43,6 +43,11 @@
 #include <fst/symbol-table.h>
 #include <string_view>
 
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
+
 namespace fst {
 
 template <class Arc>
@@ -166,6 +171,9 @@ class MutableFst : public ExpandedFst<A> {
         }
         return Read(strm, FstReadOptions(source));
       } else {
+        #ifdef _WIN32
+          _setmode(_fileno(stdin), _O_BINARY);
+        #endif
         return Read(std::cin, FstReadOptions("standard input"));
       }
     } else {  // Converts to 'convert_type' if not mutable.

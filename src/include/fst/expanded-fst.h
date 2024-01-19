@@ -39,6 +39,11 @@
 #include <fst/properties.h>
 #include <fst/register.h>
 
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
+
 namespace fst {
 
 // A generic FST plus state count.
@@ -95,6 +100,9 @@ class ExpandedFst : public Fst<A> {
       }
       return Read(strm, FstReadOptions(source));
     } else {
+        #ifdef _WIN32
+          _setmode(_fileno(stdin), _O_BINARY);
+        #endif
       return Read(std::cin, FstReadOptions("standard input"));
     }
   }
@@ -168,6 +176,9 @@ class ImplToExpandedFst : public ImplToFst<Impl, FST> {
       }
       return Impl::Read(strm, FstReadOptions(source));
     } else {
+        #ifdef _WIN32
+          _setmode(_fileno(stdin), _O_BINARY);
+        #endif
       return Impl::Read(std::cin, FstReadOptions("standard input"));
     }
   }

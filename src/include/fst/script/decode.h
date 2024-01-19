@@ -25,6 +25,7 @@
 #include <fst/mutable-fst.h>
 #include <fst/script/encodemapper-class.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -38,7 +39,7 @@ void Decode(FstDecodeArgs *args) {
   Decode(fst, mapper);
 }
 
-void Decode(MutableFstClass *fst, const EncodeMapperClass &encoder);
+void fstscript_EXPORT Decode(MutableFstClass *fst, const EncodeMapperClass &encoder);
 
 }  // namespace script
 }  // namespace fst

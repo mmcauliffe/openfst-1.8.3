@@ -28,7 +28,7 @@
 namespace fst {
 namespace script {
 
-enum class ArcSortType : uint8_t { ILABEL, OLABEL };
+enum class fstscript_EXPORT ArcSortType : uint8_t { ILABEL, OLABEL };
 
 using FstArcSortArgs = std::pair<MutableFstClass *, ArcSortType>;
 
@@ -49,7 +49,7 @@ void ArcSort(FstArcSortArgs *args) {
   }
 }
 
-void ArcSort(MutableFstClass *ofst, ArcSortType);
+void fstscript_EXPORT ArcSort(MutableFstClass *ofst, ArcSortType);
 
 }  // namespace script
 }  // namespace fst

@@ -41,7 +41,7 @@ namespace script {
 // Non-mutable arc iterators.
 
 // Virtual interface implemented by each concrete ArcIteratorImpl<F>.
-class ArcIteratorImplBase {
+class fstscript_EXPORT ArcIteratorImplBase {
  public:
   virtual bool Done() const = 0;
   virtual uint8_t Flags() const = 0;

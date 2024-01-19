@@ -29,6 +29,7 @@
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
 #include <fst/script/script-impl.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -72,7 +73,7 @@ void RandEquivalent(FstRandEquivalentArgs *args) {
   }
 }
 
-bool RandEquivalent(
+bool fstscript_EXPORT RandEquivalent(
     const FstClass &fst1, const FstClass &fst2, int32_t npath = 1,
     const RandGenOptions<RandArcSelection> &opts =
         RandGenOptions<RandArcSelection>(RandArcSelection::UNIFORM),

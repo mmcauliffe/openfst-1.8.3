@@ -24,6 +24,7 @@
 #include <fst/mutable-fst.h>
 #include <fst/synchronize.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -37,7 +38,7 @@ void Synchronize(FstSynchronizeArgs *args) {
   Synchronize(ifst, ofst);
 }
 
-void Synchronize(const FstClass &ifst, MutableFstClass *ofst);
+void fstscript_EXPORT Synchronize(const FstClass &ifst, MutableFstClass *ofst);
 
 }  // namespace script
 }  // namespace fst

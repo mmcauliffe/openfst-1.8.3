@@ -31,10 +31,11 @@
 #include <fst/matcher-fst.h>
 #include <fst/matcher.h>
 #include <fst/util.h>
+#include <fst/exports/exports.h>
 
-DECLARE_int64(phi_fst_phi_label);
-DECLARE_bool(phi_fst_phi_loop);
-DECLARE_string(phi_fst_rewrite_mode);
+DECLARE_export_int64(phi_fst_phi_label,  fstspecial_EXPORT);
+DECLARE_export_bool(phi_fst_phi_loop, fstspecial_EXPORT);
+DECLARE_export_string(phi_fst_rewrite_mode, fstspecial_EXPORT);
 
 namespace fst {
 namespace internal {

@@ -36,7 +36,7 @@ namespace internal {
 // number, or zero if the number of lines could not be determined because the
 // file was not seekable.
 int KeySize(std::string_view source) {
-  std::ifstream istrm(std::string{source});
+  std::ifstream istrm(std::string{source}, std::ios_base::in | std::ios_base::binary);
   istrm.seekg(0);
   // TODO(jrosenstock): Change this to is_regular_file when <filesystem> is
   // no longer banned.

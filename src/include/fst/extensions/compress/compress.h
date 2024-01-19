@@ -52,6 +52,11 @@
 #include <fst/visit.h>
 #include <string_view>
 
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
+
 namespace fst {
 
 // Identifies stream data as a vanilla compressed FST.
@@ -791,6 +796,12 @@ template <class Arc>
       return false;
     }
   }
+  
+  #ifdef _WIN32
+  if (!fstrm.is_open()) {
+      _setmode(_fileno(stdin), _O_BINARY);
+  }
+  #endif
   std::istream &istrm = fstrm.is_open() ? fstrm : std::cin;
   if (!Decompress(istrm, source.empty() ? "standard input" : source, fst)) {
     return false;

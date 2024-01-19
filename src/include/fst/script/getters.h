@@ -42,35 +42,36 @@
 #include <fst/script/map.h>             // For MapType.
 #include <fst/script/script-impl.h>     // For RandArcSelection.
 #include <string_view>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
 
 inline constexpr uint64_t kDefaultSeed = std::numeric_limits<uint64_t>::max();
 
-bool GetArcFilterType(std::string_view str, ArcFilterType *arc_filter_type);
+bool fstscript_EXPORT GetArcFilterType(std::string_view str, ArcFilterType *arc_filter_type);
 
-bool GetArcSortType(std::string_view str, ArcSortType *sort_type);
+bool fstscript_EXPORT GetArcSortType(std::string_view str, ArcSortType *sort_type);
 
-bool GetClosureType(std::string_view str, ClosureType *closure_type);
+bool fstscript_EXPORT GetClosureType(std::string_view str, ClosureType *closure_type);
 
-bool GetComposeFilter(std::string_view str, ComposeFilter *compose_filter);
+bool fstscript_EXPORT GetComposeFilter(std::string_view str, ComposeFilter *compose_filter);
 
-bool GetDeterminizeType(std::string_view str, DeterminizeType *det_type);
+bool fstscript_EXPORT GetDeterminizeType(std::string_view str, DeterminizeType *det_type);
 
-inline uint8_t GetEncodeFlags(bool encode_labels, bool encode_weights) {
+inline uint8_t fstscript_EXPORT GetEncodeFlags(bool encode_labels, bool encode_weights) {
   return (encode_labels ? kEncodeLabels : 0) |
          (encode_weights ? kEncodeWeights : 0);
 }
 
-bool GetEpsNormalizeType(std::string_view str,
+bool fstscript_EXPORT GetEpsNormalizeType(std::string_view str,
                          EpsNormalizeType *eps_norm_type);
 
-bool GetMapType(std::string_view str, MapType *map_type);
+bool fstscript_EXPORT GetMapType(std::string_view str, MapType *map_type);
 
-bool GetProjectType(std::string_view str, ProjectType *project_type);
+bool fstscript_EXPORT GetProjectType(std::string_view str, ProjectType *project_type);
 
-inline uint8_t GetPushFlags(bool push_weights, bool push_labels,
+inline uint8_t fstscript_EXPORT GetPushFlags(bool push_weights, bool push_labels,
                             bool remove_total_weight,
                             bool remove_common_affix) {
   return ((push_weights ? kPushWeights : 0) | (push_labels ? kPushLabels : 0) |
@@ -78,18 +79,18 @@ inline uint8_t GetPushFlags(bool push_weights, bool push_labels,
           (remove_common_affix ? kPushRemoveCommonAffix : 0));
 }
 
-bool GetQueueType(std::string_view str, QueueType *queue_type);
+bool fstscript_EXPORT GetQueueType(std::string_view str, QueueType *queue_type);
 
-bool GetRandArcSelection(std::string_view str, RandArcSelection *ras);
+bool fstscript_EXPORT GetRandArcSelection(std::string_view str, RandArcSelection *ras);
 
-bool GetReplaceLabelType(std::string_view str, bool epsilon_on_replace,
+bool fstscript_EXPORT GetReplaceLabelType(std::string_view str, bool epsilon_on_replace,
                          ReplaceLabelType *rlt);
 
-bool GetReweightType(std::string_view str, ReweightType *reweight_type);
+bool fstscript_EXPORT GetReweightType(std::string_view str, ReweightType *reweight_type);
 
-uint64_t GetSeed(uint64_t seed);
+uint64_t fstscript_EXPORT GetSeed(uint64_t seed);
 
-bool GetTokenType(std::string_view str, TokenType *token_type);
+bool fstscript_EXPORT GetTokenType(std::string_view str, TokenType *token_type);
 
 }  // namespace script
 }  // namespace fst
