@@ -26,6 +26,7 @@
 #include <fst/script/fst-class.h>
 #include <fst/script/script-impl.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -44,7 +45,7 @@ void Reweight(FstReweightArgs *args) {
   Reweight(fst, typed_potentials, std::get<2>(*args));
 }
 
-void Reweight(MutableFstClass *fst, const std::vector<WeightClass> &potentials,
+void fstscript_EXPORT Reweight(MutableFstClass *fst, const std::vector<WeightClass> &potentials,
               ReweightType reweight_type);
 
 }  // namespace script

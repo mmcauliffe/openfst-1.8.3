@@ -57,7 +57,7 @@ int fstcompile_main(int argc, char **argv) {
   std::string source = "standard input";
   std::ifstream fstrm;
   if (argc > 1 && strcmp(argv[1], "-") != 0) {
-    fstrm.open(argv[1]);
+    fstrm.open(argv[1], std::ios_base::in | std::ios_base::binary);
     if (!fstrm) {
       LOG(ERROR) << argv[0] << ": Open failed, file = " << argv[1];
       return 1;

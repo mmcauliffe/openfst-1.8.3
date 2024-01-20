@@ -42,6 +42,7 @@
 #include <fst/script/arc-class.h>
 #include <fst/script/weight-class.h>
 #include <string_view>
+#include <fst/exports/exports.h>
 
 // Classes to support "boxing" all existing types of FST arcs in a single
 // FstClass which hides the arc types. This allows clients to load
@@ -57,7 +58,7 @@ namespace script {
 // hierarchy bifurcates; FstClassImplBase serves as the base class for all
 // implementations (of which FstClassImpl is currently the only one) and
 // FstClass serves as the base class for all interfaces.
-class FstClassBase {
+class fstscript_EXPORT FstClassBase {
  public:
   virtual const std::string &ArcType() const = 0;
   virtual WeightClass Final(int64_t) const = 0;
@@ -302,9 +303,9 @@ class FstClassImpl : public FstClassImplBase {
 
 // BASE CLASS DEFINITIONS
 
-class MutableFstClass;
+class fstscript_EXPORT MutableFstClass;
 
-class FstClass : public FstClassBase {
+class fstscript_EXPORT FstClass : public FstClassBase {
  public:
   FstClass() : impl_(nullptr) {}
 
@@ -549,7 +550,7 @@ class MutableFstClass : public FstClass {
       : FstClass(std::move(impl)) {}
 };
 
-class VectorFstClass : public MutableFstClass {
+class fstscript_EXPORT VectorFstClass : public MutableFstClass {
  public:
   explicit VectorFstClass(std::unique_ptr<FstClassImplBase> impl)
       : MutableFstClass(std::move(impl)) {}
@@ -630,7 +631,15 @@ class FstClassIORegister
   std::string ConvertKeyToSoFilename(std::string_view key) const final {
     std::string legal_type(key);
     ConvertToLegalCSymbol(&legal_type);
-    legal_type.append("-arc.so");
+    legal_type.append("-arc");
+    #ifdef _WIN32
+        legal_type.append(".dll");
+    #elif defined __APPLE__
+        legal_type.append(".dylib");
+    #else
+        legal_type.append(".so");
+
+    #endif // _WIN32
     return legal_type;
   }
 };

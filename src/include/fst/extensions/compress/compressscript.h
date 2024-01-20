@@ -26,6 +26,7 @@
 #include <fst/mutable-fst.h>
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -41,7 +42,7 @@ void Compress(CompressArgs *args) {
   args->retval = Compress(fst, source);
 }
 
-bool Compress(const FstClass &fst, const std::string &source);
+bool fstcompressscript_EXPORT Compress(const FstClass &fst, const std::string &source);
 
 using DecompressInnerArgs = std::tuple<const std::string &, MutableFstClass *>;
 
@@ -54,7 +55,7 @@ void Decompress(DecompressArgs *args) {
   args->retval = Decompress(source, fst);
 }
 
-bool Decompress(const std::string &source, MutableFstClass *fst);
+bool fstcompressscript_EXPORT Decompress(const std::string &source, MutableFstClass *fst);
 
 }  // namespace script
 }  // namespace fst

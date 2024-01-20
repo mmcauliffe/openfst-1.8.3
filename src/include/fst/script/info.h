@@ -26,6 +26,7 @@
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
 #include <fst/script/info-impl.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -41,7 +42,7 @@ void Info(FstInfoArgs *args) {
   info.Info();
 }
 
-void Info(const FstClass &fst, bool test_properties, ArcFilterType arc_filter,
+void fstscript_EXPORT Info(const FstClass &fst, bool test_properties, ArcFilterType arc_filter,
           const std::string &info_type, bool verify);
 
 }  // namespace script

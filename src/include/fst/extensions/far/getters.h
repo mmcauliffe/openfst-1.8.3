@@ -27,19 +27,20 @@
 #include <fst/extensions/far/far.h>
 #include <fst/string.h>
 #include <string_view>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
 
-bool GetFarType(std::string_view str, FarType *far_type);
+bool fstfarscript_EXPORT GetFarType(std::string_view str, FarType *far_type);
 
-bool GetFarEntryType(std::string_view str, FarEntryType *entry_type);
+bool fstfarscript_EXPORT GetFarEntryType(std::string_view str, FarEntryType *entry_type);
 
-void ExpandArgs(int argc, char **argv, int *argcp, char ***argvp);
+void fstfarscript_EXPORT ExpandArgs(int argc, char **argv, int *argcp, char ***argvp);
 
 }  // namespace script
 
-std::string GetFarTypeString(FarType far_type);
+std::string fstfarscript_EXPORT GetFarTypeString(FarType far_type);
 
 }  // namespace fst
 

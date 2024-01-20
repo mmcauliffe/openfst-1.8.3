@@ -31,9 +31,10 @@
 #include <fst/matcher-fst.h>
 #include <fst/matcher.h>
 #include <fst/util.h>
+#include <fst/exports/exports.h>
 
-DECLARE_int64(sigma_fst_sigma_label);
-DECLARE_string(sigma_fst_rewrite_mode);
+DECLARE_export_int64(sigma_fst_sigma_label, fstspecial_EXPORT);
+DECLARE_export_string(sigma_fst_rewrite_mode, fstspecial_EXPORT);
 
 namespace fst {
 namespace internal {

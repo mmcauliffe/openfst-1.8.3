@@ -63,7 +63,7 @@ int farcompilestrings_main(int argc, char **argv) {
   std::vector<std::string> sources;
   if (FST_FLAGS_file_list_input) {
     for (int i = 1; i < argc - 1; ++i) {
-      std::ifstream istrm(argv[i]);
+      std::ifstream istrm(argv[i], std::ios_base::in | std::ios_base::binary);
       std::string str;
       while (std::getline(istrm, str)) sources.push_back(str);
     }

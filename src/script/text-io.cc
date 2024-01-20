@@ -37,7 +37,7 @@ namespace script {
 // Reads vector of weights; returns true on success.
 bool ReadPotentials(std::string_view weight_type, const std::string &source,
                     std::vector<WeightClass> *potentials) {
-  std::ifstream istrm(source);
+  std::ifstream istrm(source, std::ios_base::in | std::ios_base::binary);
   if (!istrm) {
     LOG(ERROR) << "ReadPotentials: Can't open file: " << source;
     return false;
@@ -71,7 +71,7 @@ bool WritePotentials(const std::string &source,
                      const std::vector<WeightClass> &potentials) {
   std::ofstream ostrm;
   if (!source.empty()) {
-    ostrm.open(source);
+    ostrm.open(source, std::ios_base::out | std::ios_base::binary);
     if (!ostrm) {
       LOG(ERROR) << "WritePotentials: Can't open file: " << source;
       return false;

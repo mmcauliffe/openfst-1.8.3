@@ -491,7 +491,7 @@ VectorFstImpl<S> *VectorFstImpl<S>::Read(std::istream &strm,
     int64_t narcs;
     ReadType(strm, &narcs);
     if (!strm) {
-      LOG(ERROR) << "VectorFst::Read: Read failed: " << opts.source;
+      LOG(ERROR) << "VectorFst::Read: State read failed: " << opts.source;
       return nullptr;
     }
     impl->ReserveArcs(state, narcs);
@@ -502,7 +502,7 @@ VectorFstImpl<S> *VectorFstImpl<S>::Read(std::istream &strm,
       arc.weight.Read(strm);
       ReadType(strm, &arc.nextstate);
       if (!strm) {
-        LOG(ERROR) << "VectorFst::Read: Read failed: " << opts.source;
+        LOG(ERROR) << "VectorFst::Read: Arc read failed: " << opts.source;
         return nullptr;
       }
       impl->BaseImpl::AddArc(state, std::move(arc));

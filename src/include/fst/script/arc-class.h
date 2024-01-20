@@ -21,6 +21,7 @@
 #include <cstdint>
 
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -28,7 +29,7 @@ namespace script {
 // A struct representing an arc while ignoring arc type. It is passed as an
 // argument to AddArc.
 
-struct ArcClass {
+struct fstscript_EXPORT ArcClass {
   template <class Arc>
   explicit ArcClass(const Arc &arc)
       : ilabel(arc.ilabel),

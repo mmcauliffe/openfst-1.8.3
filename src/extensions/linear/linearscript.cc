@@ -82,7 +82,7 @@ REGISTER_FST_OPERATION_3ARCS(LinearCompileTpl, LinearCompileArgs);
 
 void SplitByWhitespace(const std::string &str, std::vector<std::string> *out) {
   out->clear();
-  std::istringstream strm(str);
+  std::istringstream strm(str, std::ios_base::in | std::ios_base::binary);
   std::string buf;
   while (strm >> buf) out->push_back(buf);
 }

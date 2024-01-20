@@ -29,6 +29,7 @@
 #include <fst/relabel.h>
 #include <fst/symbol-table.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -66,13 +67,13 @@ void Relabel(FstRelabelArgs2 *args) {
   Relabel(ofst, typed_ipairs, typed_opairs);
 }
 
-void Relabel(MutableFstClass *ofst, const SymbolTable *old_isymbols,
+void fstscript_EXPORT Relabel(MutableFstClass *ofst, const SymbolTable *old_isymbols,
              const SymbolTable *new_isymbols,
              const std::string &unknown_isymbol, bool attach_new_isymbols,
              const SymbolTable *old_osymbols, const SymbolTable *new_osymbols,
              const std::string &unknown_osymbol, bool attach_new_osymbols);
 
-void Relabel(MutableFstClass *ofst,
+void fstscript_EXPORT Relabel(MutableFstClass *ofst,
              const std::vector<std::pair<int64_t, int64_t>> &ipairs,
              const std::vector<std::pair<int64_t, int64_t>> &opairs);
 

@@ -31,7 +31,7 @@
 class LogMessage;
 class LogMessage;
 
-DECLARE_int32(v);
+DECLARE_export_int32(v, fst_EXPORT);
 
 class LogMessage {
  public:

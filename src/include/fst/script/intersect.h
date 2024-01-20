@@ -26,6 +26,7 @@
 #include <fst/mutable-fst.h>
 #include <fst/script/compose.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -42,7 +43,7 @@ void Intersect(FstIntersectArgs *args) {
   Intersect(ifst1, ifst2, ofst, opts);
 }
 
-void Intersect(const FstClass &ifst, const FstClass &ifst2,
+void fstscript_EXPORT Intersect(const FstClass &ifst, const FstClass &ifst2,
                MutableFstClass *ofst,
                const ComposeOptions &opts = ComposeOptions());
 

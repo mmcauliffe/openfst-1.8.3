@@ -20,6 +20,7 @@
 
 #include <fst/connect.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -29,7 +30,7 @@ void Connect(MutableFstClass *fst) {
   Connect(fst->GetMutableFst<Arc>());
 }
 
-void Connect(MutableFstClass *fst);
+void fstscript_EXPORT Connect(MutableFstClass *fst);
 
 }  // namespace script
 }  // namespace fst

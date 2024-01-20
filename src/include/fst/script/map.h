@@ -31,6 +31,7 @@
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -53,7 +54,7 @@ std::unique_ptr<Fst<typename M::ToArc>> StateMap(
   return ofst;
 }
 
-enum class MapType : uint8_t {
+enum class fstscript_EXPORT MapType : uint8_t {
   ARC_SUM,
   ARC_UNIQUE,
   IDENTITY,
@@ -164,7 +165,7 @@ void Map(FstMapArgs *args) {
   }
 }
 
-std::unique_ptr<FstClass> Map(const FstClass &ifst,
+std::unique_ptr<FstClass> fstscript_EXPORT Map(const FstClass &ifst,
                                               MapType map_type, float delta,
                                               double power,
                                               const WeightClass &weight);

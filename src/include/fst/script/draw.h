@@ -25,6 +25,7 @@
 #include <fst/symbol-table.h>
 #include <fst/script/draw-impl.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -32,7 +33,7 @@ namespace script {
 // Note: it is safe to pass these strings as references because this struct is
 // only used to pass them deeper in the call graph. Be sure you understand why
 // this is so before using this struct for anything else!
-struct FstDrawArgs {
+struct fstscript_EXPORT FstDrawArgs {
   const FstClass &fst;
   const SymbolTable *isyms;
   const SymbolTable *osyms;
@@ -64,7 +65,7 @@ void Draw(FstDrawArgs *args) {
   fstdrawer.Draw(args->ostrm, args->dest);
 }
 
-void Draw(const FstClass &fst, const SymbolTable *isyms,
+void fstscript_EXPORT Draw(const FstClass &fst, const SymbolTable *isyms,
           const SymbolTable *osyms, const SymbolTable *ssyms, bool accep,
           const std::string &title, float width, float height, bool portrait,
           bool vertical, float ranksep, float nodesep, int fontsize,

@@ -19,10 +19,11 @@
 #define FST_SCRIPT_ARCFILTER_IMPL_H_
 
 #include <cstdint>
+#include <fst/exports/exports.h>
 
 namespace fst::script {
 
-enum class ArcFilterType : uint8_t {
+enum class fstscript_EXPORT ArcFilterType : uint8_t {
   ANY,
   EPSILON,
   INPUT_EPSILON,

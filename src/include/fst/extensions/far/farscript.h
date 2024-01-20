@@ -45,6 +45,7 @@
 #include <fst/script/encodemapper-class.h>
 #include <fst/script/script-impl.h>
 #include <string_view>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -52,7 +53,7 @@ namespace script {
 // Note: it is safe to pass these strings as references because this struct is
 // only used to pass them deeper in the call graph. Be sure you understand why
 // this is so before using this struct for anything else!
-struct FarCompileStringsArgs {
+struct fstfarscript_EXPORT FarCompileStringsArgs {
   const std::vector<std::string> &sources;
   FarWriterClass &writer;
   std::string_view fst_type;
@@ -76,7 +77,7 @@ void CompileStrings(FarCompileStringsArgs *args) {
       args->initial_symbols, args->key_prefix, args->key_suffix);
 }
 
-void CompileStrings(const std::vector<std::string> &sources,
+void fstfarscript_EXPORT CompileStrings(const std::vector<std::string> &sources,
                     FarWriterClass &writer, std::string_view fst_type,
                     int32_t generate_keys, FarEntryType fet, TokenType tt,
                     const std::string &symbols_source,
@@ -94,13 +95,13 @@ void Convert(FarConvertArgs *args) {
   ::fst::Convert<Arc>(reader, writer, std::get<2>(*args));
 }
 
-void Convert(FarReaderClass &reader, FarWriterClass &writer,
+void fstfarscript_EXPORT Convert(FarReaderClass &reader, FarWriterClass &writer,
              std::string_view fst_type);
 
 // Note: it is safe to pass these strings as references because this struct is
 // only used to pass them deeper in the call graph. Be sure you understand why
 // this is so before using this struct for anything else!
-struct FarCreateArgs {
+struct fstfarscript_EXPORT FarCreateArgs {
   const std::vector<std::string> &sources;
   FarWriterClass &writer;
   const int32_t generate_keys;
@@ -115,7 +116,7 @@ void Create(FarCreateArgs *args) {
                          args->key_prefix, args->key_suffix);
 }
 
-void Create(const std::vector<std::string> &sources, FarWriterClass &writer,
+void fstfarscript_EXPORT Create(const std::vector<std::string> &sources, FarWriterClass &writer,
             int32_t generate_keys, const std::string &key_prefix,
             const std::string &key_suffix);
 
@@ -130,7 +131,7 @@ void Decode(FarDecodeArgs *args) {
   Decode(reader, writer, mapper);
 }
 
-void Decode(FarReaderClass &reader, FarWriterClass &writer,
+void fstfarscript_EXPORT Decode(FarReaderClass &reader, FarWriterClass &writer,
             const EncodeMapperClass &encoder);
 
 using FarEncodeArgs =
@@ -144,7 +145,7 @@ void Encode(FarEncodeArgs *args) {
   Encode(reader, writer, mapper);
 }
 
-void Encode(FarReaderClass &reader, FarWriterClass &writer,
+void fstfarscript_EXPORT Encode(FarReaderClass &reader, FarWriterClass &writer,
             EncodeMapperClass *encoder);
 
 using FarEqualInnerArgs = std::tuple<FarReaderClass &, FarReaderClass &, float,
@@ -161,7 +162,7 @@ void Equal(FarEqualArgs *args) {
                             std::get<3>(args->args), std::get<4>(args->args));
 }
 
-bool Equal(FarReaderClass &reader1, FarReaderClass &reader2,
+bool fstfarscript_EXPORT Equal(FarReaderClass &reader1, FarReaderClass &reader2,
            float delta = kDelta, std::string_view begin_key = "",
            std::string_view end_key = "");
 
@@ -178,7 +179,7 @@ void Extract(FarExtractArgs *args) {
                           std::get<5>(*args), std::get<6>(*args));
 }
 
-void Extract(FarReaderClass &reader, int32_t generate_sources,
+void fstfarscript_EXPORT Extract(FarReaderClass &reader, int32_t generate_sources,
              const std::string &keys, const std::string &key_separator,
              const std::string &range_delimiter,
              const std::string &source_prefix,
@@ -194,7 +195,7 @@ void Info(FarInfoArgs *args) {
                        std::get<2>(*args), std::get<3>(*args));
 }
 
-void Info(const std::vector<std::string> &sources, const std::string &arc_type,
+void fstfarscript_EXPORT Info(const std::vector<std::string> &sources, const std::string &arc_type,
           const std::string &begin_key, const std::string &end_key,
           const bool list_fsts);
 
@@ -209,7 +210,7 @@ void GetInfo(FarGetInfoArgs *args) {
                           std::get<4>(*args));
 }
 
-void GetInfo(const std::vector<std::string> &sources,
+void fstfarscript_EXPORT GetInfo(const std::vector<std::string> &sources,
              const std::string &arc_type, const std::string &begin_key,
              const std::string &end_key, const bool list_fsts, FarInfoData *);
 
@@ -228,11 +229,11 @@ void Isomorphic(FarIsomorphicArgs *args) {
       std::get<4>(args->args));
 }
 
-bool Isomorphic(FarReaderClass &reader1, FarReaderClass &reader2,
+bool fstfarscript_EXPORT Isomorphic(FarReaderClass &reader1, FarReaderClass &reader2,
                 float delta = kDelta, std::string_view begin_key = "",
                 std::string_view end_key = "");
 
-struct FarPrintStringsArgs {
+struct fstfarscript_EXPORT FarPrintStringsArgs {
   FarReaderClass &reader;
   const FarEntryType entry_type;
   const TokenType token_type;
@@ -257,7 +258,7 @@ void PrintStrings(FarPrintStringsArgs *args) {
                                args->source_prefix, args->source_suffix);
 }
 
-void PrintStrings(FarReaderClass &reader, const FarEntryType entry_type,
+void fstfarscript_EXPORT PrintStrings(FarReaderClass &reader, const FarEntryType entry_type,
                   const TokenType token_type, const std::string &begin_key,
                   const std::string &end_key, const bool print_key,
                   const bool print_weight, const std::string &symbols_source,

@@ -47,6 +47,7 @@
 #include <fst/script/script-impl.h>
 #include <fst/script/shortest-path.h>
 #include <fst/script/weight-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -75,12 +76,12 @@ void Compose(PdtComposeArgs *args) {
   }
 }
 
-void Compose(const FstClass &ifst1, const FstClass &ifst2,
+void fstpdtscript_EXPORT Compose(const FstClass &ifst1, const FstClass &ifst2,
              const std::vector<std::pair<int64_t, int64_t>> &parens,
              MutableFstClass *ofst, const PdtComposeOptions &opts,
              bool left_pdt);
 
-struct PdtExpandOptions {
+struct fstpdtscript_EXPORT PdtExpandOptions {
   bool connect;
   bool keep_parentheses;
   const WeightClass &weight_threshold;
@@ -112,11 +113,11 @@ void Expand(PdtExpandArgs *args) {
                    .weight_threshold.GetWeight<typename Arc::Weight>())));
 }
 
-void Expand(const FstClass &ifst,
+void fstpdtscript_EXPORT Expand(const FstClass &ifst,
             const std::vector<std::pair<int64_t, int64_t>> &parens,
             MutableFstClass *ofst, const PdtExpandOptions &opts);
 
-void Expand(const FstClass &ifst,
+void fstpdtscript_EXPORT Expand(const FstClass &ifst,
             const std::vector<std::pair<int64_t, int64_t>> &parens,
             MutableFstClass *ofst, bool connect, bool keep_parentheses,
             const WeightClass &weight_threshold);
@@ -149,7 +150,7 @@ void Replace(PdtReplaceArgs *args) {
             std::get<2>(*args)->begin());
 }
 
-void Replace(const std::vector<std::pair<int64_t, const FstClass *>> &pairs,
+void fstpdtscript_EXPORT Replace(const std::vector<std::pair<int64_t, const FstClass *>> &pairs,
              MutableFstClass *ofst,
              std::vector<std::pair<int64_t, int64_t>> *parens, int64_t root,
              PdtParserType parser_type = PdtParserType::LEFT,
@@ -176,13 +177,13 @@ void Reverse(PdtReverseArgs *args) {
   Reverse(fst, typed_parens, ofst);
 }
 
-void Reverse(const FstClass &ifst,
+void fstpdtscript_EXPORT Reverse(const FstClass &ifst,
              const std::vector<std::pair<int64_t, int64_t>> &,
              MutableFstClass *ofst);
 
 // PDT SHORTESTPATH
 
-struct PdtShortestPathOptions {
+struct fstpdtscript_EXPORT PdtShortestPathOptions {
   QueueType queue_type;
   bool keep_parentheses;
   bool path_gc;
@@ -237,7 +238,7 @@ void ShortestPath(PdtShortestPathArgs *args) {
   }
 }
 
-void ShortestPath(
+void fstpdtscript_EXPORT ShortestPath(
     const FstClass &ifst,
     const std::vector<std::pair<int64_t, int64_t>> &parens,
     MutableFstClass *ofst,
@@ -262,7 +263,7 @@ void Info(PdtInfoArgs *args) {
   pdtinfo.Print();
 }
 
-void Info(const FstClass &ifst,
+void fstpdtscript_EXPORT Info(const FstClass &ifst,
           const std::vector<std::pair<int64_t, int64_t>> &parens);
 
 }  // namespace script

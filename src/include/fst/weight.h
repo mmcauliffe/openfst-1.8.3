@@ -37,8 +37,8 @@
 #include <fst/log.h>
 #include <fst/util.h>
 
-DECLARE_string(fst_weight_parentheses);
-DECLARE_string(fst_weight_separator);
+DECLARE_export_string(fst_weight_parentheses, fst_EXPORT);
+DECLARE_export_string(fst_weight_separator, fst_EXPORT);
 
 namespace fst {
 
@@ -271,7 +271,7 @@ struct WeightGenerate {
 
 namespace internal {
 
-class CompositeWeightIO {
+class fst_EXPORT CompositeWeightIO {
  public:
   CompositeWeightIO();
   CompositeWeightIO(char separator, std::pair<char, char> parentheses);
@@ -295,7 +295,7 @@ class CompositeWeightIO {
 }  // namespace internal
 
 // Helper class for writing textual composite weights.
-class CompositeWeightWriter : public internal::CompositeWeightIO {
+class fst_EXPORT CompositeWeightWriter : public internal::CompositeWeightIO {
  public:
   // Uses configuration from flags (FST_FLAGS_fst_weight_separator,
   // FST_FLAGS_fst_weight_parentheses).
@@ -331,7 +331,7 @@ class CompositeWeightWriter : public internal::CompositeWeightIO {
 // a separator character. There must be at least one element per textual
 // representation. Parentheses characters should be set if the composite
 // weights themselves contain composite weights to ensure proper parsing.
-class CompositeWeightReader : public internal::CompositeWeightIO {
+class fst_EXPORT CompositeWeightReader : public internal::CompositeWeightIO {
  public:
   // Uses configuration from flags (FST_FLAGS_fst_weight_separator,
   // FST_FLAGS_fst_weight_parentheses).

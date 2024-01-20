@@ -28,6 +28,13 @@
 
 namespace fst {
 
+#if defined(_WIN32) || defined(__APPLE__)
+Singleton& GetSingleton() {
+    static Singleton _instance;
+    return _instance;
+};
+#endif
+
 REGISTER_FST(VectorFst, StdArc);
 REGISTER_FST(VectorFst, LogArc);
 REGISTER_FST(VectorFst, Log64Arc);

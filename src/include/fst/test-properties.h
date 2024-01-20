@@ -33,8 +33,6 @@
 #include <fst/util.h>
 #include <unordered_set>
 
-DECLARE_bool(fst_verify_properties);
-
 namespace fst {
 namespace internal {
 

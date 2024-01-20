@@ -58,16 +58,51 @@ struct KeyLookupReferenceType<std::string> {
 };
 }  // namespace internal
 
+
+
+#if defined(_WIN32) || defined(__APPLE__)
+
+class RegisterBase { };
+
+class Singleton {
+public:
+
+    template <class RegisterType>
+    std::shared_ptr<RegisterType> GetRegister() {
+
+        std::string type_name = typeid(RegisterType).name();
+        if (registry.find(type_name) == registry.end()) {
+            std::shared_ptr<RegisterType> r = std::make_shared<RegisterType>();
+            registry[type_name] = std::static_pointer_cast <RegisterBase>(r);
+        }
+        return  std::static_pointer_cast <RegisterType>(registry[type_name]);
+    }
+private:
+    std::map<std::string, std::shared_ptr<RegisterBase>> registry;
+};
+
+fst_EXPORT Singleton& GetSingleton();
+
+#endif
+
 template <class KeyType, class EntryType, class RegisterType>
+#if defined(_WIN32) || defined(__APPLE__)
+class GenericRegister : public RegisterBase {
+#else
 class GenericRegister {
+#endif
  public:
   using Key = KeyType;
   using KeyLookupRef = typename internal::KeyLookupReferenceType<KeyType>::type;
   using Entry = EntryType;
 
   static RegisterType *GetRegister() {
-    static auto reg = new RegisterType;
-    return reg;
+    #if defined(_WIN32) || defined(__APPLE__)
+      return GetSingleton().GetRegister<RegisterType>().get();
+    #else
+      static auto reg = new RegisterType;
+      return reg;
+    #endif
   }
 
   void SetEntry(const KeyType &key, const EntryType &entry) {
@@ -145,7 +180,11 @@ class GenericRegisterer {
   using Entry = typename RegisterType::Entry;
 
   GenericRegisterer(Key key, Entry entry) {
+    #if defined(_WIN32) || defined(__APPLE__)
+      GetSingleton().GetRegister<RegisterType>()->SetEntry(key, entry);
+    #else
     RegisterType::GetRegister()->SetEntry(key, entry);
+    #endif
   }
 };
 

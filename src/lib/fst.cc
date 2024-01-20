@@ -31,6 +31,9 @@
 #include <fst/util.h>
 #include <string_view>
 
+#include <fst/cache.h>
+#include <fst/lookahead-matcher.h>
+
 // FST flag definitions.
 
 DEFINE_bool(fst_verify_properties, false,

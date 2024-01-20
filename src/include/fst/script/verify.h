@@ -22,6 +22,7 @@
 #include <fst/verify.h>
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -34,7 +35,7 @@ void Verify(FstVerifyArgs *args) {
   args->retval = Verify(fst);
 }
 
-bool Verify(const FstClass &fst);
+bool fstscript_EXPORT Verify(const FstClass &fst);
 
 }  // namespace script
 }  // namespace fst

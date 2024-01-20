@@ -20,6 +20,7 @@
 
 #include <fst/invert.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -29,7 +30,7 @@ void Invert(MutableFstClass *fst) {
   Invert(fst->GetMutableFst<Arc>());
 }
 
-void Invert(MutableFstClass *fst);
+void fstscript_EXPORT Invert(MutableFstClass *fst);
 
 }  // namespace script
 }  // namespace fst

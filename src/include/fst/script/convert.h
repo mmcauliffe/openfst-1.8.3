@@ -26,6 +26,7 @@
 #include <fst/register.h>
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -44,7 +45,7 @@ void Convert(FstConvertArgs *args) {
       result ? std::make_unique<FstClass>(std::move(result)) : nullptr;
 }
 
-std::unique_ptr<FstClass> Convert(const FstClass &fst,
+std::unique_ptr<FstClass> fstscript_EXPORT Convert(const FstClass &fst,
                                   const std::string &new_type);
 
 }  // namespace script

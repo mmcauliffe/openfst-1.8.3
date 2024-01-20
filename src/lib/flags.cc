@@ -28,6 +28,13 @@
 
 #include <fst/log.h>
 
+#ifdef _WIN32
+FlagSingleton& GetFlagSingleton() {
+    static FlagSingleton _instance;
+    return _instance;
+};
+#endif
+
 static const char *private_tmpdir = getenv("TMPDIR");
 
 DEFINE_int32(v, 0, "verbosity level");

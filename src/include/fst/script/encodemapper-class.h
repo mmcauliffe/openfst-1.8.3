@@ -33,6 +33,7 @@
 #include <fst/script/arc-class.h>
 #include <fst/script/fst-class.h>
 #include <string_view>
+#include <fst/exports/exports.h>
 
 // Scripting API support for EncodeMapper.
 
@@ -40,7 +41,7 @@ namespace fst {
 namespace script {
 
 // Virtual interface implemented by each concrete EncodeMapperClassImpl<Arc>.
-class EncodeMapperImplBase {
+class fstscript_EXPORT EncodeMapperImplBase {
  public:
   // Returns an encoded ArcClass.
   virtual ArcClass operator()(const ArcClass &) = 0;
@@ -125,7 +126,7 @@ inline ArcClass EncodeMapperClassImpl<Arc>::operator()(const ArcClass &a) {
   return ArcClass(mapper_(arc));
 }
 
-class EncodeMapperClass {
+class fstscript_EXPORT EncodeMapperClass {
  public:
   EncodeMapperClass() : impl_(nullptr) {}
 
@@ -264,7 +265,15 @@ class EncodeMapperClassIORegister
   std::string ConvertKeyToSoFilename(std::string_view key) const final {
     std::string legal_type(key);
     ConvertToLegalCSymbol(&legal_type);
-    legal_type.append("-arc.so");
+    legal_type.append("-arc");
+    #ifdef _WIN32
+        legal_type.append(".dll");
+    #elif defined __APPLE__
+        legal_type.append(".dylib");
+    #else
+        legal_type.append(".so");
+
+    #endif // _WIN32
     return legal_type;
   }
 };

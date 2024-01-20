@@ -52,6 +52,11 @@
 #include <fst/util.h>
 #include <fst/vector-fst.h>
 
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
+
 namespace fst {
 template <class A>
 class NGramFst;
@@ -417,6 +422,9 @@ class NGramFst : public ImplToExpandedFst<internal::NGramFstImpl<A>> {
       }
       return Read(strm, FstReadOptions(source));
     } else {
+        #ifdef _WIN32
+          _setmode(_fileno(stdin), _O_BINARY);
+        #endif
       return Read(std::cin, FstReadOptions("standard input"));
     }
   }

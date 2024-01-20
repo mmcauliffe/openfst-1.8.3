@@ -240,13 +240,13 @@ class FstTester {
     {
       // check mmaping by first writing the file with the aligned attribute set
       {
-        std::ofstream ostr(aligned);
+        std::ofstream ostr(aligned, std::ios_base::binary);
         FstWriteOptions opts;
         opts.source = aligned;
         opts.align = true;
         CHECK(fst.Write(ostr, opts));
       }
-      std::ifstream istr(aligned);
+      std::ifstream istr(aligned, std::ios_base::binary);
       FstReadOptions opts;
       opts.mode = FstReadOptions::ReadMode("map");
       opts.source = aligned;
@@ -258,13 +258,13 @@ class FstTester {
     // check mmaping of unaligned files to make sure it does not fail.
     {
       {
-        std::ofstream ostr(aligned);
+        std::ofstream ostr(aligned, std::ios_base::binary);
         FstWriteOptions opts;
         opts.source = aligned;
         opts.align = false;
         CHECK(fst.Write(ostr, opts));
       }
-      std::ifstream istr(aligned);
+      std::ifstream istr(aligned, std::ios_base::binary);
       FstReadOptions opts;
       opts.mode = FstReadOptions::ReadMode("map");
       opts.source = aligned;

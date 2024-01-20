@@ -25,6 +25,7 @@
 #include <fst/weight.h>
 #include <fst/script/arg-packs.h>
 #include <fst/script/fst-class.h>
+#include <fst/exports/exports.h>
 
 namespace fst {
 namespace script {
@@ -42,7 +43,7 @@ void Equivalent(FstEquivalentArgs *args) {
       Equivalent(fst1, fst2, std::get<2>(args->args), std::get<3>(args->args));
 }
 
-bool Equivalent(const FstClass &fst1, const FstClass &fst2,
+bool fstscript_EXPORT Equivalent(const FstClass &fst1, const FstClass &fst2,
                 float delta = kDelta, bool *error = nullptr);
 
 }  // namespace script

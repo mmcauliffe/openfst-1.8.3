@@ -71,7 +71,7 @@ inline constexpr int32_t kEncodeDeprecatedMagicNumber = 2129983209;
 }  // namespace internal
 
 // Header for the encoder table.
-class EncodeTableHeader {
+class fst_EXPORT EncodeTableHeader {
  public:
   EncodeTableHeader() = default;
 
